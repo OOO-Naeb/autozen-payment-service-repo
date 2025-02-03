@@ -68,12 +68,17 @@ class RabbitMQAPIGatewayListener(IQueueListener):
                 print("To send back to:", message.reply_to)
 
                 operation_type = data.get("operation_type")
-                print(data)
+
+                # Delete unnecessary 'operation_type' key from the data and leave only the card info
+                del data["operation_type"]
+                card_info = CardInfo(**data)
+
                 handler = self.operation_types_and_handlers.get(operation_type)
-                print("handler", handler)
 
                 try:
-                    status_code, response = await handler(data)
+                    # PyCharm bug possibly???
+                    # noinspection PyArgumentList
+                    status_code, response = await handler(card_info)
                 except Exception as e:
                     self.logger.error(f"Error while handling operation '{operation_type}': {e}")
                     status_code, response = 500, {"error": str(e)}
