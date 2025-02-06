@@ -5,9 +5,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="21d5d8dc-26bf-40be-8157-c7f9a81b96b5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/infrastructure/adapters/rabbitmq_api_gateway_listener.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/infrastructure/interfaces/queue_listener_interface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/Payment_Service.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/application/interfaces/bank_card_repository_interface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/application/interfaces/payment_gateway_interface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/application/use_cases/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/application/use_cases/add_bank_account.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/application/use_cases/add_bank_card.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/models/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/models/payment_methods.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/infrastructure/adapters/bank_payment_gateway.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/infrastructure/dao/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/infrastructure/dao/bank_account_dao.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/infrastructure/dao/bank_card_dao.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/infrastructure/database/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/infrastructure/database/database.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/infrastructure/database/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/infrastructure/repositories/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/infrastructure/repositories/bank_account_repository.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/infrastructure/repositories/bank_card_repository.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alembic.ini" beforeDir="false" afterPath="$PROJECT_DIR$/alembic.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/api_gateway_log.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/api_gateway_log.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/env.py" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/env.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/services/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/interfaces/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/services/payment_service.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/middleware/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/interfaces/bank_account_repository_interface.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/middleware/exceptions_middleware.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/exceptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/exceptions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/schemas.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/infrastructure/adapters/rabbitmq_api_gateway_listener.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/infrastructure/adapters/rabbitmq_api_gateway_listener.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/infrastructure/interfaces/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/interfaces/message_queue_interface.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/infrastructure/interfaces/queue_listener_interface.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,51 +83,35 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;FastAPI.Payment Service.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
+    &quot;database.data.extractors.current.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/PycharmProjects/autozen-payment-service-repo/src/main.py&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/PycharmProjects/autozen-payment-service-repo/src/infrastructure/adapters/interfaces&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
   }
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\PycharmProjects\autozen-payment-service-repo\src\infrastructure\repositories\interfaces" />
+      <recent name="C:\Users\User\PycharmProjects\autozen-payment-service-repo\src\infrastructure\dao\interfaces" />
+      <recent name="C:\Users\User\PycharmProjects\autozen-payment-service-repo\src\infrastructure\adapters\interfaces" />
       <recent name="C:\Users\User\PycharmProjects\autozen-payment-service-repo\src" />
     </key>
-  </component>
-  <component name="RunManager">
-    <configuration name="Payment Service" type="Python.FastAPI">
-      <option name="file" value="C:\Users\User\PycharmProjects\autozen-payment-service-repo\src\main.py" />
-      <module name="autozen-payment-service-repo" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="$PROJECT_DIR$/.venv/Scripts/python.exe" />
-      <option name="SDK_NAME" value="Poetry (autozen-payment-service-repo)" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <EXTENSION ID="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-        </ENTRIES>
-      </EXTENSION>
-      <option name="launchJavascriptDebuger" value="false" />
-      <method v="2" />
-    </configuration>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -113,10 +131,16 @@
       <updated>1738580085970</updated>
       <workItem from="1738580087004" duration="1321000" />
       <workItem from="1738585573973" duration="1120000" />
+      <workItem from="1738693331819" duration="3761000" />
+      <workItem from="1738756674534" duration="12169000" />
+      <workItem from="1738835177902" duration="11160000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/autozen_payment_service_repo$Payment_Service.coverage" NAME="Payment Service Coverage Results" MODIFIED="1738854006051" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

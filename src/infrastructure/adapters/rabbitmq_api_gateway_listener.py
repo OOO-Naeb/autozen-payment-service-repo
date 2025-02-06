@@ -1,100 +1,129 @@
+from src.domain.exceptions import SourceUnavailableException, PaymentGatewayException
+
 import json
-from typing import Annotated, Callable
-
+from typing import Any, Callable
 import aio_pika
-from fastapi import Depends
-
-from src.application.services.payment_service import PaymentService
 from src.core.config import settings
-from src.core.logger import LoggerService
-from src.domain.exceptions import SourceUnavailableException
-from src.domain.schemas import CardInfo
-from src.infrastructure.interfaces.queue_listener_interface import IQueueListener
+from src.domain.schemas import RabbitMQResponse
 
 
-class RabbitMQAPIGatewayListener(IQueueListener):
-    def __init__(self, payment_service: Annotated[PaymentService, Depends(PaymentService)]) -> None:
-        self.payment_service = payment_service
-        self.logger = LoggerService(__name__, "api_gateway_log.log")
-        self.connection = None
-        self.channel = None
-        self.exchange = None
-        self.exchange_name = 'GATEWAY-PAYMENT-EXCHANGE.direct'
-        self.operation_types_and_handlers = {
-            'add_new_payment_method': self.payment_service.get_payment_token,
+class RabbitMQApiGatewayListener:
+    def __init__(
+            self,
+            add_bank_card_use_case,
+            add_bank_account_use_case,
+            logger
+    ):
+        self._add_bank_card_use_case = add_bank_card_use_case
+        self._add_bank_account_use_case = add_bank_account_use_case
+        self._logger = logger
+
+        self._connection = None
+        self._channel = None
+        self._exchange = None
+        self._exchange_name = 'GATEWAY-PAYMENT-EXCHANGE.direct'
+
+        self._operation_handlers = {
+            'add_bank_card': self._add_bank_card_use_case.execute,
+            'add_bank_account': self._add_bank_account_use_case.execute
         }
 
-    async def connect(self):
-        if not self.connection or self.connection.is_closed:
+    async def connect(self) -> None:
+        if not self._connection or self._connection.is_closed:
             try:
-                self.connection = await aio_pika.connect_robust(
+                self._connection = await aio_pika.connect_robust(
                     settings.RABBITMQ_URL,
                     timeout=10,
                     client_properties={'client_name': 'Payment Service'}
                 )
-                self.channel = await self.connection.channel()
-                self.exchange = await self.channel.declare_exchange(
-                    self.exchange_name, aio_pika.ExchangeType.DIRECT, durable=True
+                self._channel = await self._connection.channel()
+                self._exchange = await self._channel.declare_exchange(
+                    self._exchange_name,
+                    aio_pika.ExchangeType.DIRECT,
+                    durable=True
                 )
             except aio_pika.exceptions.AMQPConnectionError as e:
-                self.logger.error(
-                    f"RabbitMQ service is unavailable. Connection error: {e}. From: RabbitMQAPIGatewayListener, connect()"
-                )
+                self._logger.critical(f"RabbitMQ service is unavailable. Connection error: {e}. From: RabbitMQListener, connect().")
                 raise SourceUnavailableException(detail="RabbitMQ service is unavailable.")
 
     async def _initialize_queue(self) -> None:
-        await self.connect()
-
-        payment_queue = await self.channel.declare_queue('PAYMENT.all', durable=True)
-
-        await payment_queue.bind(self.exchange, routing_key='PAYMENT.all')
-        await payment_queue.consume(self._create_callback())
-
-        self.logger.info(f"[*] Listening to queue 'PAYMENT_QUEUE' with exchange '{self.exchange_name}'.")
-
+        payment_queue = await self._channel.declare_queue(
+            'PAYMENT.all',
+            durable=True
+        )
+        await payment_queue.bind(self._exchange, routing_key='PAYMENT.all')
+        await payment_queue.consume(self._message_handler())
 
     async def start_listening(self) -> None:
         await self.connect()
         await self._initialize_queue()
+        self._logger.info("Started listening for messages.")
 
-    def _create_callback(self) -> Callable:
-        async def callback(message: aio_pika.IncomingMessage):
+    async def send_response(
+            self,
+            routing_key: str,
+            response: Any,
+            correlation_id: str
+    ) -> None:
+        print(response)
+        message = aio_pika.Message(
+            body=json.dumps({
+                "status_code": response.status_code,
+                "body": response.body,
+                "success": response.success,
+                "error_message": response.error_message
+            }).encode(),
+            correlation_id=correlation_id
+        )
+        await self._channel.default_exchange.publish(
+            message,
+            routing_key=routing_key
+        )
+
+    def _message_handler(self) -> Callable:
+        async def handler(message: aio_pika.IncomingMessage) -> None:
             async with message.process():
-                self.logger.info(f"[X] Received message from {message.routing_key} - {message.body}")
-                data = json.loads(message.body.decode())
-
-                # Dev logs
-                print("Correlation ID from sender ->", message.correlation_id)
-                print("To send back to:", message.reply_to)
-
-                operation_type = data.get("operation_type")
-
-                # Delete unnecessary 'operation_type' key from the data and leave only the card info
-                del data["operation_type"]
-                card_info = CardInfo(**data)
-
-                handler = self.operation_types_and_handlers.get(operation_type)
-
+                self._logger.info(f"Received message: {message.body}")
                 try:
-                    # PyCharm bug possibly???
-                    # noinspection PyArgumentList
-                    status_code, response = await handler(card_info)
+                    data = json.loads(message.body.decode())
+                    operation_type = data.pop("operation_type")
+                    operation_handler = self._operation_handlers.get(operation_type)
+                    if not operation_handler:
+                        self._logger.error(
+                            f"Unknown 'operation_type' received in RabbitMQApiGatewayListener, _message_handler(): {operation_type}"
+                        )
+                        raise ValueError(f"Unknown 'operation_type' received: {operation_type}")
+
+                    result = await operation_handler(data)
+
+                    status_code = 200
+                    if operation_type.startswith('add_'):
+                        status_code = 201
+
+                    response = RabbitMQResponse.success_response(
+                        status_code=status_code,
+                        body=result.to_serializable_dict()  # Converts datetime objects to strings. Otherwise, JSON serialization will fail.
+                    )
+
+                except PaymentGatewayException as e:
+                    self._logger.error(f"PaymentGatewayException occurred while processing message in RabbitMQApiGatewayListener, _message_handler(): {str(e)}")
+                    response = RabbitMQResponse.error_response(
+                        status_code=400,
+                        message=f"Payment Gateway exception occurred while processing message in the Payment Service: {str(e)}"
+                    )
+                    raise e
                 except Exception as e:
-                    self.logger.error(f"Error while handling operation '{operation_type}': {e}")
-                    status_code, response = 500, {"error": str(e)}
-
-                response_message = json.dumps({
-                    "status_code": status_code,
-                    "body": response
-                })
-
-                await self.channel.default_exchange.publish(
-                    aio_pika.Message(
-                        body=response_message.encode(),
+                    self._logger.critical(f"Unhandled error occurred while processing message in RabbitMQApiGatewayListener, _message_handler(): {str(e)}")
+                    response = RabbitMQResponse.error_response(
+                        status_code=500,
+                        message=f"Unhandled error occurred while processing message in the Payment Service: {str(e)}"
+                    )
+                    raise e
+                finally:
+                    await self.send_response(
+                        routing_key=message.reply_to,
+                        response=response,
                         correlation_id=message.correlation_id
-                    ),
-                    routing_key=message.reply_to
-                )
-                self.logger.info(f"Sent response with correlation_id {message.correlation_id}")
+                    )
 
-        return callback
+        return handler

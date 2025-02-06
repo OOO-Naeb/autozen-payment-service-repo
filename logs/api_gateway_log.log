@@ -1,11 +1,9 @@
-ERROR:    2025-02-03 20:47:49 - src.infrastructure.adapters.rabbitmq_api_gateway_listener: Error while handling operation 'add_new_payment_method': 'dict' object has no attribute 'card_number'
-ERROR:    2025-02-03 20:50:47 - src.infrastructure.adapters.rabbitmq_api_gateway_listener: Error while handling operation 'add_new_payment_method': 'dict' object has no attribute 'card_number'
-ERROR:    2025-02-03 20:50:58 - src.infrastructure.adapters.rabbitmq_api_gateway_listener: Error while handling operation 'add_new_payment_method': 'dict' object has no attribute 'card_number'
-ERROR:    2025-02-03 20:51:21 - src.infrastructure.adapters.rabbitmq_api_gateway_listener: Error while handling operation 'add_new_payment_method': 'dict' object has no attribute 'card_number'
-ERROR:    2025-02-03 20:54:51 - src.infrastructure.adapters.rabbitmq_api_gateway_listener: Error while handling operation 'add_new_payment_method': 'dict' object has no attribute 'card_number'
-ERROR:    2025-02-03 20:55:59 - src.infrastructure.adapters.rabbitmq_api_gateway_listener: Error while handling operation 'add_new_payment_method': 'dict' object has no attribute 'card_number'
-ERROR:    2025-02-03 20:56:40 - src.infrastructure.adapters.rabbitmq_api_gateway_listener: Error while handling operation 'add_new_payment_method': not enough values to unpack (expected 2, got 1)
-ERROR:    2025-02-03 20:57:43 - src.infrastructure.adapters.rabbitmq_api_gateway_listener: Error while handling operation 'add_new_payment_method': not enough values to unpack (expected 2, got 1)
-ERROR:    2025-02-03 20:58:28 - src.infrastructure.adapters.rabbitmq_api_gateway_listener: Error while handling operation 'add_new_payment_method': 'CardInfo' object is not subscriptable
-ERROR:    2025-02-03 20:59:55 - src.infrastructure.adapters.rabbitmq_api_gateway_listener: Error while handling operation 'add_new_payment_method': 'CardInfo' object is not subscriptable
-ERROR:    2025-02-03 21:00:08 - src.infrastructure.adapters.rabbitmq_api_gateway_listener: Error while handling operation 'add_new_payment_method': 'CardInfo' object is not subscriptable
+
+ERROR:    2025-02-06 19:27:12 - src.main: PaymentGatewayException occurred while processing message in RabbitMQApiGatewayListener, _message_handler(): Failed to get payment token.
+ERROR:    2025-02-06 19:27:24 - src.main: PaymentGatewayException occurred while processing message in RabbitMQApiGatewayListener, _message_handler(): Failed to get payment token.
+CRITICAL:    2025-02-06 19:28:55 - src.main: Unhandled error occurred while processing message in RabbitMQApiGatewayListener, _message_handler(): 'dict' object has no attribute 'card_number'
+CRITICAL:    2025-02-06 19:30:16 - src.main: Unhandled error occurred while processing message in RabbitMQApiGatewayListener, _message_handler(): 'dict' object has no attribute 'card_number'
+CRITICAL:    2025-02-06 19:32:30 - src.main: Unhandled error occurred while processing message in RabbitMQApiGatewayListener, _message_handler(): CardInfo.__init__() got an unexpected keyword argument 'payment_method_type'
+CRITICAL:    2025-02-06 19:34:01 - src.main: Unhandled error occurred while processing message in RabbitMQApiGatewayListener, _message_handler(): CardInfo.__init__() got an unexpected keyword argument 'payment_method_type'
+CRITICAL:    2025-02-06 19:50:52 - src.main: Unhandled error occurred while processing message in RabbitMQApiGatewayListener, _message_handler(): PaymentMethod.convert_datetime_fields_to_str() missing 1 required positional argument: 'data'
+CRITICAL:    2025-02-06 19:51:01 - src.main: Unhandled error occurred while processing message in RabbitMQApiGatewayListener, _message_handler(): PaymentMethod.convert_datetime_fields_to_str() missing 1 required positional argument: 'data'
