@@ -11,6 +11,7 @@ class RabbitMQResponse:
     body: Union[str, dict]
     success: bool = True
     error_message: Optional[str] = None
+    error_origin: Optional[str] = None
 
     @classmethod
     def success_response(cls, status_code: int, body: Union[str, dict]) -> "RabbitMQResponse":
@@ -21,12 +22,13 @@ class RabbitMQResponse:
         )
 
     @classmethod
-    def error_response(cls, status_code: int, message: str = '') -> "RabbitMQResponse":
+    def error_response(cls, status_code: int, message: str = '', error_origin: str = 'Payment Service') -> "RabbitMQResponse":
         return cls(
             status_code=status_code,
             body={},
             success=False,
-            error_message=message
+            error_message=message,
+            error_origin=error_origin
         )
 
 

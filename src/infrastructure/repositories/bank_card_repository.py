@@ -3,8 +3,7 @@ import datetime
 from typing import Optional
 from uuid import UUID
 
-
-from src.application.interfaces.bank_card_repository_interface import IBankCardRepository
+from src.domain.interfaces.repositories_interfaces.bank_card_repository_interface import IBankCardRepository
 from src.domain.models.payment_methods import CardPaymentMethod
 from src.infrastructure.dao.bank_card_dao import BankCardDAO
 from src.infrastructure.database.models import BankCardModel

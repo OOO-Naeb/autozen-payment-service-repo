@@ -1,9 +1,9 @@
 import datetime
 import uuid
 
-from src.application.interfaces.bank_account_repository_interface import IBankAccountRepository
-from src.application.interfaces.payment_gateway_interface import IPaymentGateway
-from src.domain.exceptions import InvalidPaymentMethodException
+from src.infrastructure.exceptions import InvalidPaymentMethodException
+from src.domain.interfaces.payment_gateway_interface import IPaymentGateway
+from src.domain.interfaces.repositories_interfaces.bank_account_repository_interface import IBankAccountRepository
 from src.domain.models.payment_methods import BankAccountPaymentMethod
 from src.domain.schemas import BankAccountInfo
 
@@ -12,7 +12,6 @@ class AddBankAccountUseCase:
     """
     USE CASE: Create a new payment method (bank account) and get a token from the payment gateway (bank API).
     """
-
     def __init__(self, payment_gateway: IPaymentGateway,
                  bank_account_repository: IBankAccountRepository) -> None:
         self._payment_gateway = payment_gateway
@@ -24,15 +23,15 @@ class AddBankAccountUseCase:
         return await self._bank_account_repository.create(bank_account_info)
 
     @staticmethod
-    def _add_bank_account(info: BankAccountInfo) -> BankAccountPaymentMethod:
+    def _add_bank_account(bank_account_info: BankAccountInfo) -> BankAccountPaymentMethod:
         current_time = datetime.datetime.now(datetime.UTC)
 
         return BankAccountPaymentMethod(
             id=uuid.uuid4(),
-            account_holder_name=info.account_holder_name,
-            account_number=info.account_number,
-            bank_name=info.bank_name,
-            bank_bic=info.bank_bic,
+            account_holder_name=bank_account_info.account_holder_name,
+            account_number=bank_account_info.account_number,
+            bank_name=bank_account_info.bank_name,
+            bank_bic=bank_account_info.bank_bic,
             created_at=current_time,
             updated_at=current_time
         )

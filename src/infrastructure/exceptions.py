@@ -12,9 +12,9 @@ class InvalidPaymentMethodException(PaymentServiceException):
         super().__init__(detail=detail, status_code=400)
 
 
-class SourceUnavailableException(PaymentServiceException):
-    """Exception for source service being unavailable."""
-    def __init__(self, detail: str = "Source service is unavailable."):
+class RabbitMQError(PaymentServiceException):
+    """Exception for RabbitMQ service being unavailable."""
+    def __init__(self, detail: str = "RabbitMQ is unavailable."):
         super().__init__(detail=detail, status_code=503)
 
 

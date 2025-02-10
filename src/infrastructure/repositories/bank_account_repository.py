@@ -2,7 +2,7 @@ import datetime
 import uuid
 from typing import Optional
 
-from src.application.interfaces.bank_account_repository_interface import IBankAccountRepository
+from src.domain.interfaces.repositories_interfaces.bank_account_repository_interface import IBankAccountRepository
 from src.domain.models.payment_methods import BankAccountPaymentMethod
 from src.infrastructure.dao.bank_account_dao import BankAccountDAO
 from src.infrastructure.database.models import BankAccountModel

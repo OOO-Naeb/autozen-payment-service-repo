@@ -2,9 +2,11 @@ from abc import abstractmethod, ABC
 from typing import Any
 
 
-class IMessageQueue(ABC):
-    """Port for detail queue operations."""
-
+class IQueueListener(ABC):
+    """
+    This is an abstract base class that defines the interface that works with
+    queues such as RabbitMQ.
+    """
     @abstractmethod
     async def connect(self) -> None:
         pass

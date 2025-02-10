@@ -41,6 +41,7 @@ class PaymentMethod(ABC):
         Convert the domain object to a dictionary with datetime/date fields converted to strings.
         """
         raw_dict = self.to_dict()
+
         return self.convert_datetime_fields_to_str(raw_dict)
 
 

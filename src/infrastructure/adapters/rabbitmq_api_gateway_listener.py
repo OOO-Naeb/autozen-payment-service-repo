@@ -1,13 +1,14 @@
-from src.domain.exceptions import SourceUnavailableException, PaymentGatewayException
+from src.infrastructure.exceptions import RabbitMQError, PaymentGatewayException
 
 import json
 from typing import Any, Callable
 import aio_pika
 from src.core.config import settings
+from src.domain.interfaces.message_queue_interface import IQueueListener
 from src.domain.schemas import RabbitMQResponse
 
 
-class RabbitMQApiGatewayListener:
+class RabbitMQApiGatewayListener(IQueueListener):
     def __init__(
             self,
             add_bank_card_use_case,
@@ -29,6 +30,12 @@ class RabbitMQApiGatewayListener:
         }
 
     async def connect(self) -> None:
+        """
+        Establishes a connection to the RabbitMQ service.
+
+        Raises:
+            RabbitMQError: When RabbitMQ service is not available.
+        """
         if not self._connection or self._connection.is_closed:
             try:
                 self._connection = await aio_pika.connect_robust(
@@ -44,7 +51,7 @@ class RabbitMQApiGatewayListener:
                 )
             except aio_pika.exceptions.AMQPConnectionError as e:
                 self._logger.critical(f"RabbitMQ service is unavailable. Connection error: {e}. From: RabbitMQListener, connect().")
-                raise SourceUnavailableException(detail="RabbitMQ service is unavailable.")
+                raise RabbitMQError(detail="RabbitMQ service is unavailable.")
 
     async def _initialize_queue(self) -> None:
         payment_queue = await self._channel.declare_queue(
@@ -57,7 +64,7 @@ class RabbitMQApiGatewayListener:
     async def start_listening(self) -> None:
         await self.connect()
         await self._initialize_queue()
-        self._logger.info("Started listening for messages.")
+        self._logger.info("Started listening for messages in the 'PAYMENT.all' queue.")
 
     async def send_response(
             self,
@@ -109,14 +116,16 @@ class RabbitMQApiGatewayListener:
                     self._logger.error(f"PaymentGatewayException occurred while processing message in RabbitMQApiGatewayListener, _message_handler(): {str(e)}")
                     response = RabbitMQResponse.error_response(
                         status_code=400,
-                        message=f"Payment Gateway exception occurred while processing message in the Payment Service: {str(e)}"
+                        message=f"Payment Gateway exception occurred while processing message in the Payment Service: {str(e)}",
+                        error_origin='Payment Service'
                     )
                     raise e
                 except Exception as e:
                     self._logger.critical(f"Unhandled error occurred while processing message in RabbitMQApiGatewayListener, _message_handler(): {str(e)}")
                     response = RabbitMQResponse.error_response(
                         status_code=500,
-                        message=f"Unhandled error occurred while processing message in the Payment Service: {str(e)}"
+                        message=f"Unhandled error occurred while processing message in the Payment Service: {str(e)}",
+                        error_origin='Payment Service'
                     )
                     raise e
                 finally:

@@ -1,10 +1,9 @@
 import datetime
 import uuid
 
-
-from src.application.interfaces.payment_gateway_interface import IPaymentGateway
-from src.application.interfaces.bank_card_repository_interface import IBankCardRepository
-from src.domain.exceptions import InvalidPaymentMethodException
+from src.infrastructure.exceptions import InvalidPaymentMethodException
+from src.domain.interfaces.payment_gateway_interface import IPaymentGateway
+from src.domain.interfaces.repositories_interfaces.bank_card_repository_interface import IBankCardRepository
 from src.domain.models.payment_methods import CardPaymentMethod
 from src.domain.schemas import CardInfo
 
