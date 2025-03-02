@@ -15,6 +15,13 @@ class InactiveCompanyError(ApplicationError):
     def __init__(self, status_code: int = 403, message: str = "Company is inactive."):
         super().__init__(message=message, status_code=status_code)
 
+
+class ExistingBankAccountError(ApplicationError):
+    """Raised when company already has a bank account."""
+    def __init__(self, message: str = "This company already has a bank account."):
+        super().__init__(message=message, status_code=409)
+
+
 class InvalidPaymentMethodError(ApplicationError):
     """Raised when payment method is invalid."""
     def __init__(self, message: str = "Invalid payment method."):

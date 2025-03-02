@@ -22,7 +22,7 @@ class UserServiceAdapter(IUserServiceAdapter):
             first_name="John",
             last_name="Doe",
             roles=[RolesEnum.USER],
-            is_active=False,
+            is_active=True,
             email="example@gmail.com",
             phone_number="+1234567890",
             created_at=datetime.now(),

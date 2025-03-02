@@ -1,6 +1,7 @@
 from typing import Optional
 
-from src.application.exceptions import InactiveCompanyError, CompanyNotFoundError, InvalidPaymentMethodError
+from src.application.exceptions import InactiveCompanyError, CompanyNotFoundError, InvalidPaymentMethodError, \
+    ExistingBankAccountError
 from src.core.logger import LoggerService
 from src.domain.interfaces.company_service_adapter_interface import ICompanyServiceAdapter
 from src.domain.interfaces.payment_gateway_interface import IPaymentGateway
@@ -31,6 +32,11 @@ class AddBankAccountUseCase:
             # Check if this company is existing in the system
             company = await self._company_adapter.get_company_by_id(bank_account.company_id)
 
+            # Check if this company already has a bank account in the 'bank_accounts' table
+            bank_account_exists = await self._bank_account_repository.get_by_company_id(bank_account.company_id)
+            if bank_account_exists:
+                raise ExistingBankAccountError()
+
             # Check if this company is inactive
             if not company.is_active:
                 raise InactiveCompanyError(
@@ -44,7 +50,8 @@ class AddBankAccountUseCase:
         except (
                 InvalidPaymentMethodError,
                 CompanyNotFoundError,
-                InactiveCompanyError
+                InactiveCompanyError,
+                ExistingBankAccountError
         ) as e:
             self._logger.error(f"Error creating bank account: {e}.")
             raise

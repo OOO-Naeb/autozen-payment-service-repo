@@ -2,10 +2,19 @@ import re
 from datetime import date, datetime
 from decimal import Decimal
 from enum import Enum
-from typing import Annotated, Optional
+from typing import Annotated, Optional, TypeVar, Generic
 from uuid import UUID
 
-from pydantic import BaseModel, StringConstraints, field_validator, Field
+from pydantic import BaseModel, StringConstraints, field_validator, Field, ConfigDict
+
+ApiResponseData = TypeVar("ApiResponseData")
+
+
+class APIResponse(BaseModel, Generic[ApiResponseData]):
+    success: bool
+    message: str
+    content: ApiResponseData
+    model_config = ConfigDict(arbitrary_types_allowed=True)
 
 
 class AddBankCardRequest(BaseModel):

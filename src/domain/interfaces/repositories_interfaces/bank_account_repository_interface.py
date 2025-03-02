@@ -18,12 +18,10 @@ class IBankAccountRepository(ABC):
         """Get a bank account by ID."""
         pass
 
-    # Temporarily commented out due to the lack of implementation in the repository
-
-    # @abstractmethod
-    # async def get_by_user_id(self, user_id: UUID) -> List[BankAccountPaymentMethod]:
-    #     """Get all bank accounts for a user."""
-    #     pass
+    @abstractmethod
+    async def get_by_company_id(self, company_id: UUID) -> BankAccountPaymentMethod:
+        """Get bank account for a certain company."""
+        pass
 
     @abstractmethod
     async def update(self, bank_account: BankAccountPaymentMethod) -> BankAccountPaymentMethod:
