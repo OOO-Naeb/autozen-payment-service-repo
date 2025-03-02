@@ -1,6 +1,6 @@
 import datetime
 import uuid
-from typing import Optional
+from typing import Optional, List
 
 from src.domain.interfaces.repositories_interfaces.bank_account_repository_interface import IBankAccountRepository
 from src.domain.models.payment_methods import BankAccountPaymentMethod
@@ -23,6 +23,8 @@ class BankAccountRepository(IBankAccountRepository):
             account_number=model.account_number,
             bank_name=model.bank_name,
             bank_bic=model.bank_bic,
+            balance=model.balance,
+            company_id=model.company_id,
             is_active=model.is_active,
 
             created_at=model.created_at,
@@ -40,6 +42,8 @@ class BankAccountRepository(IBankAccountRepository):
             account_number=domain.account_number,
             bank_name=domain.bank_name,
             bank_bic=domain.bank_bic,
+            balance=domain.balance,
+            company_id=domain.company_id,
             is_active=domain.is_active,
 
             created_at=domain.created_at if domain.created_at is not None else datetime.datetime.now(
@@ -59,15 +63,14 @@ class BankAccountRepository(IBankAccountRepository):
 
         return self._to_domain(model) if model else None
 
-    # Temporarily commented out due to the lack of 'user_id' field in the database model
-
-    # async def get_by_user_id(self, user_id: UUID) -> List[BankAccountPaymentMethod]:
-    #     models = await self._dao.get_by_user_id(user_id)
-    #     return [self._to_domain(model) for model in models]
+    async def get_by_company_id(self, company_id: uuid.UUID) -> List[BankAccountPaymentMethod]:
+        models = await self._dao.get_by_company_id(company_id)
+        return [self._to_domain(model) for model in models]
 
     async def update(self, bank_account: BankAccountPaymentMethod) -> BankAccountPaymentMethod:
         model = self._to_model(bank_account)
         updated_model = await self._dao.update(model)
+        
 
         return self._to_domain(updated_model)
 

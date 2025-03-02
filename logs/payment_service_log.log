@@ -1,0 +1,14 @@
+CRITICAL:    2025-03-02 11:09:58 - src.core.dependencies: Unhandled error occurred while adding the bank card, details: CardPaymentMethod.__init__() missing 1 required positional argument: 'is_active'
+CRITICAL:    2025-03-02 11:10:31 - src.core.dependencies: Unhandled error occurred while adding the bank card, details: CardPaymentMethod.__init__() missing 1 required keyword-only argument: 'is_active'
+ERROR:    2025-03-02 14:12:09 - src.core.dependencies: Error occurred while adding the bank account: AddBankAccountDTO.__init__() missing 2 required positional arguments: 'bank_name' and 'bank_bic'
+CRITICAL:    2025-03-02 14:13:20 - src.core.dependencies: Unexpected error creating bank account: Company with ID: 3fa85f64-5717-4562-b3fc-2c963f66afa6 not found..
+ERROR:    2025-03-02 14:13:20 - src.core.dependencies: Error occurred while adding the bank account: Company with ID: 3fa85f64-5717-4562-b3fc-2c963f66afa6 not found.
+CRITICAL:    2025-03-02 14:14:21 - src.core.dependencies: Unexpected error creating bank account: Company with ID: 3fa85f64-5717-4562-b3fc-2c963f66afa6 not found..
+CRITICAL:    2025-03-02 14:14:47 - src.core.dependencies: Unexpected error creating bank account: Company with ID: 3fa85f64-5717-4562-b3fc-2c963f66afa6 not found..
+CRITICAL:    2025-03-02 14:15:44 - src.core.dependencies: Unexpected error creating bank account: Company with ID: 3fa85f64-5717-4562-b3fc-2c963f66afa6 not found..
+CRITICAL:    2025-03-02 14:15:45 - src.core.dependencies: Unexpected error creating bank account: Company with ID: 3fa85f64-5717-4562-b3fc-2c963f66afa6 not found..
+CRITICAL:    2025-03-02 14:15:47 - src.core.dependencies: Unexpected error creating bank account: Company with ID: 3fa85f64-5717-4562-b3fc-2c963f66afa6 not found..
+ERROR:    2025-03-02 14:16:57 - src.core.dependencies: Error creating bank account: Company is not active..
+CRITICAL:    2025-03-02 14:17:02 - src.core.dependencies: Unexpected error creating bank account: Company with ID: 3fa85f64-5717-4562-b3fc-2c963f66afa6 not found..
+CRITICAL:    2025-03-02 14:17:04 - src.core.dependencies: Unexpected error creating bank account: Company with ID: 3fa85f64-5717-4562-b3fc-2c963f66afa6 not found..
+ERROR:    2025-03-02 14:17:05 - src.core.dependencies: Error creating bank account: Company is not active..

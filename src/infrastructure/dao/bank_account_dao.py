@@ -1,5 +1,5 @@
 import datetime
-from typing import Optional
+from typing import Optional, List
 from uuid import UUID
 
 from sqlalchemy import select, update
@@ -26,15 +26,13 @@ class BankAccountDAO:
         )
         return result.scalar_one_or_none()
 
-    # Temporarily commented out due to the lack of a user_id field in the BankAccountModel
-
-    # async def get_by_user_id(self, user_id: UUID) -> List[BankCardModel]:
-    #     result = await self._async_session.execute(
-    #         select(BankCardModel)
-    #         .where(BankCardModel.user_id == user_id)
-    #         .order_by(BankCardModel.created_at.desc())
-    #     )
-    #     return list(result.scalars().all())
+    async def get_by_company_id(self, company_id: UUID) -> List[BankAccountModel]:
+        result = await self._async_session.execute(
+            select(BankAccountModel)
+            .where(BankAccountModel.company_id == company_id)
+            .order_by(BankAccountModel.created_at.desc())
+        )
+        return list(result.scalars().all())
 
     async def update(self, model: BankAccountModel) -> BankAccountModel:
         await self._async_session.merge(model)

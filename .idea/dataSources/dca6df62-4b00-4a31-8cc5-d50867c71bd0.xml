@@ -3,9 +3,9 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.53">
     <root id="1">
       <DateStyle>dmy</DateStyle>
-      <IntrospectionStateNumber>823</IntrospectionStateNumber>
+      <IntrospectionStateNumber>926</IntrospectionStateNumber>
       <ServerVersion>17.2</ServerVersion>
-      <StartupTime>1738695399</StartupTime>
+      <StartupTime>1740466107</StartupTime>
       <TimeZones>true ACDT
 true ACSST
 false ACST
@@ -47,14 +47,14 @@ false Africa/Blantyre
 false Africa/Brazzaville
 false Africa/Bujumbura
 false Africa/Cairo
-false Africa/Casablanca
+true Africa/Casablanca
 false Africa/Ceuta
 false Africa/Conakry
 false Africa/Dakar
 false Africa/Dar_es_Salaam
 false Africa/Djibouti
 false Africa/Douala
-false Africa/El_Aaiun
+true Africa/El_Aaiun
 false Africa/Freetown
 false Africa/Gaborone
 false Africa/Harare
@@ -801,7 +801,7 @@ false Zulu
 14751||10|C|G
 14751||-9223372036854775808|U|G
 14751||10|U|G</Grants>
-      <IntrospectionStateNumber>823</IntrospectionStateNumber>
+      <IntrospectionStateNumber>926</IntrospectionStateNumber>
       <ObjectId>16389</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -4228,42 +4228,42 @@ false Zulu
     <schema id="265" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>823</IntrospectionStateNumber>
-      <LastIntrospectionLocalTimestamp>2025-02-06.10:24:31</LastIntrospectionLocalTimestamp>
+      <IntrospectionStateNumber>926</IntrospectionStateNumber>
+      <LastIntrospectionLocalTimestamp>2025-03-02.08:42:33</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>532</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
     </schema>
     <table id="266" parent="265" name="alembic_version">
-      <ObjectId>16441</ObjectId>
-      <StateNumber>821</StateNumber>
+      <ObjectId>16462</ObjectId>
+      <StateNumber>846</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
     <table id="267" parent="265" name="bank_accounts">
-      <ObjectId>16446</ObjectId>
-      <StateNumber>822</StateNumber>
+      <ObjectId>16467</ObjectId>
+      <StateNumber>847</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
     <table id="268" parent="265" name="bank_cards">
-      <ObjectId>16453</ObjectId>
-      <StateNumber>822</StateNumber>
+      <ObjectId>16474</ObjectId>
+      <StateNumber>847</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
     <column id="269" parent="266" name="version_num">
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>821</StateNumber>
+      <StateNumber>846</StateNumber>
       <StoredType>varchar(32)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <index id="270" parent="266" name="alembic_version_pkc">
       <ColNames>version_num</ColNames>
-      <ObjectId>16444</ObjectId>
+      <ObjectId>16465</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>821</StateNumber>
+      <StateNumber>846</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
       <CollationNames>default</CollationNames>
@@ -4271,170 +4271,198 @@ false Zulu
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
     <key id="271" parent="266" name="alembic_version_pkc">
-      <ObjectId>16445</ObjectId>
+      <ObjectId>16466</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>821</StateNumber>
-      <UnderlyingIndexId>16444</UnderlyingIndexId>
+      <StateNumber>846</StateNumber>
+      <UnderlyingIndexId>16465</UnderlyingIndexId>
     </key>
     <column id="272" parent="267" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>822</StateNumber>
+      <StateNumber>847</StateNumber>
       <StoredType>uuid|0s</StoredType>
       <TypeId>2950</TypeId>
     </column>
     <column id="273" parent="267" name="account_holder_name">
       <Position>2</Position>
-      <StateNumber>822</StateNumber>
+      <StateNumber>847</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="274" parent="267" name="account_number">
       <Position>3</Position>
-      <StateNumber>822</StateNumber>
+      <StateNumber>847</StateNumber>
       <StoredType>varchar(50)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="275" parent="267" name="bank_name">
       <Position>4</Position>
-      <StateNumber>822</StateNumber>
+      <StateNumber>847</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="276" parent="267" name="bank_bic">
       <Position>5</Position>
-      <StateNumber>822</StateNumber>
+      <StateNumber>847</StateNumber>
       <StoredType>varchar(20)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="277" parent="267" name="is_active">
+    <column id="277" parent="267" name="balance">
       <NotNull>1</NotNull>
       <Position>6</Position>
-      <StateNumber>822</StateNumber>
+      <StateNumber>847</StateNumber>
+      <StoredType>numeric(12,2 digit)|0s</StoredType>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="278" parent="267" name="is_active">
+      <NotNull>1</NotNull>
+      <Position>7</Position>
+      <StateNumber>847</StateNumber>
       <StoredType>boolean|0s</StoredType>
       <TypeId>16</TypeId>
     </column>
-    <column id="278" parent="267" name="created_at">
-      <NotNull>1</NotNull>
-      <Position>7</Position>
-      <StateNumber>822</StateNumber>
-      <StoredType>timestamp with time zone|0s</StoredType>
-      <TypeId>1184</TypeId>
-    </column>
-    <column id="279" parent="267" name="updated_at">
+    <column id="279" parent="267" name="company_id">
       <NotNull>1</NotNull>
       <Position>8</Position>
-      <StateNumber>822</StateNumber>
-      <StoredType>timestamp with time zone|0s</StoredType>
-      <TypeId>1184</TypeId>
-    </column>
-    <index id="280" parent="267" name="bank_accounts_pkey">
-      <ColNames>id</ColNames>
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16451</ObjectId>
-      <Primary>1</Primary>
-      <StateNumber>822</StateNumber>
-      <Unique>1</Unique>
-      <AccessMethodId>403</AccessMethodId>
-    </index>
-    <key id="281" parent="267" name="bank_accounts_pkey">
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16452</ObjectId>
-      <Primary>1</Primary>
-      <StateNumber>822</StateNumber>
-      <UnderlyingIndexId>16451</UnderlyingIndexId>
-    </key>
-    <column id="282" parent="268" name="id">
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StateNumber>822</StateNumber>
+      <StateNumber>847</StateNumber>
       <StoredType>uuid|0s</StoredType>
       <TypeId>2950</TypeId>
     </column>
-    <column id="283" parent="268" name="card_holder_first_name">
-      <Position>2</Position>
-      <StateNumber>822</StateNumber>
-      <StoredType>varchar(255)|0s</StoredType>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="284" parent="268" name="card_holder_last_name">
-      <Position>3</Position>
-      <StateNumber>822</StateNumber>
-      <StoredType>varchar(255)|0s</StoredType>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="285" parent="268" name="card_last_four">
-      <Position>4</Position>
-      <StateNumber>822</StateNumber>
-      <StoredType>varchar(4)|0s</StoredType>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="286" parent="268" name="expiration_date">
-      <Position>5</Position>
-      <StateNumber>822</StateNumber>
-      <StoredType>varchar(5)|0s</StoredType>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="287" parent="268" name="payment_token">
-      <NotNull>1</NotNull>
-      <Position>6</Position>
-      <StateNumber>822</StateNumber>
-      <StoredType>varchar(255)|0s</StoredType>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="288" parent="268" name="is_active">
-      <NotNull>1</NotNull>
-      <Position>7</Position>
-      <StateNumber>822</StateNumber>
-      <StoredType>boolean|0s</StoredType>
-      <TypeId>16</TypeId>
-    </column>
-    <column id="289" parent="268" name="created_at">
-      <NotNull>1</NotNull>
-      <Position>8</Position>
-      <StateNumber>822</StateNumber>
-      <StoredType>timestamp with time zone|0s</StoredType>
-      <TypeId>1184</TypeId>
-    </column>
-    <column id="290" parent="268" name="updated_at">
+    <column id="280" parent="267" name="created_at">
       <NotNull>1</NotNull>
       <Position>9</Position>
-      <StateNumber>822</StateNumber>
+      <StateNumber>847</StateNumber>
       <StoredType>timestamp with time zone|0s</StoredType>
       <TypeId>1184</TypeId>
     </column>
-    <index id="291" parent="268" name="bank_cards_pkey">
+    <column id="281" parent="267" name="updated_at">
+      <NotNull>1</NotNull>
+      <Position>10</Position>
+      <StateNumber>847</StateNumber>
+      <StoredType>timestamp with time zone|0s</StoredType>
+      <TypeId>1184</TypeId>
+    </column>
+    <index id="282" parent="267" name="bank_accounts_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16458</ObjectId>
+      <ObjectId>16472</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>822</StateNumber>
+      <StateNumber>847</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="292" parent="268" name="bank_cards_payment_token_key">
+    <key id="283" parent="267" name="bank_accounts_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16473</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>847</StateNumber>
+      <UnderlyingIndexId>16472</UnderlyingIndexId>
+    </key>
+    <column id="284" parent="268" name="id">
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>847</StateNumber>
+      <StoredType>uuid|0s</StoredType>
+      <TypeId>2950</TypeId>
+    </column>
+    <column id="285" parent="268" name="card_holder_first_name">
+      <Position>2</Position>
+      <StateNumber>847</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="286" parent="268" name="card_holder_last_name">
+      <Position>3</Position>
+      <StateNumber>847</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="287" parent="268" name="card_last_four">
+      <Position>4</Position>
+      <StateNumber>847</StateNumber>
+      <StoredType>varchar(4)|0s</StoredType>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="288" parent="268" name="expiration_date">
+      <Position>5</Position>
+      <StateNumber>847</StateNumber>
+      <StoredType>varchar(5)|0s</StoredType>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="289" parent="268" name="payment_token">
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+      <StateNumber>847</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="290" parent="268" name="balance">
+      <NotNull>1</NotNull>
+      <Position>7</Position>
+      <StateNumber>847</StateNumber>
+      <StoredType>numeric(12,2 digit)|0s</StoredType>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="291" parent="268" name="is_active">
+      <NotNull>1</NotNull>
+      <Position>8</Position>
+      <StateNumber>847</StateNumber>
+      <StoredType>boolean|0s</StoredType>
+      <TypeId>16</TypeId>
+    </column>
+    <column id="292" parent="268" name="user_id">
+      <NotNull>1</NotNull>
+      <Position>9</Position>
+      <StateNumber>847</StateNumber>
+      <StoredType>uuid|0s</StoredType>
+      <TypeId>2950</TypeId>
+    </column>
+    <column id="293" parent="268" name="created_at">
+      <NotNull>1</NotNull>
+      <Position>10</Position>
+      <StateNumber>847</StateNumber>
+      <StoredType>timestamp with time zone|0s</StoredType>
+      <TypeId>1184</TypeId>
+    </column>
+    <column id="294" parent="268" name="updated_at">
+      <NotNull>1</NotNull>
+      <Position>11</Position>
+      <StateNumber>847</StateNumber>
+      <StoredType>timestamp with time zone|0s</StoredType>
+      <TypeId>1184</TypeId>
+    </column>
+    <index id="295" parent="268" name="bank_cards_pkey">
+      <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16479</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>847</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <index id="296" parent="268" name="bank_cards_payment_token_key">
       <ColNames>payment_token</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16460</ObjectId>
-      <StateNumber>822</StateNumber>
+      <ObjectId>16481</ObjectId>
+      <StateNumber>847</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
       <CollationNames>default</CollationNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="293" parent="268" name="bank_cards_pkey">
+    <key id="297" parent="268" name="bank_cards_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16459</ObjectId>
+      <ObjectId>16480</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>822</StateNumber>
-      <UnderlyingIndexId>16458</UnderlyingIndexId>
+      <StateNumber>847</StateNumber>
+      <UnderlyingIndexId>16479</UnderlyingIndexId>
     </key>
-    <key id="294" parent="268" name="bank_cards_payment_token_key">
+    <key id="298" parent="268" name="bank_cards_payment_token_key">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16461</ObjectId>
-      <StateNumber>822</StateNumber>
-      <UnderlyingIndexId>16460</UnderlyingIndexId>
+      <ObjectId>16482</ObjectId>
+      <StateNumber>847</StateNumber>
+      <UnderlyingIndexId>16481</UnderlyingIndexId>
     </key>
   </database-model>
 </dataSource>

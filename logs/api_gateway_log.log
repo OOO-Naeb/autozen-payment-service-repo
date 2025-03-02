@@ -1,9 +1,0 @@
-
-ERROR:    2025-02-06 19:27:12 - src.main: PaymentGatewayException occurred while processing message in RabbitMQApiGatewayListener, _message_handler(): Failed to get payment token.
-ERROR:    2025-02-06 19:27:24 - src.main: PaymentGatewayException occurred while processing message in RabbitMQApiGatewayListener, _message_handler(): Failed to get payment token.
-CRITICAL:    2025-02-06 19:28:55 - src.main: Unhandled error occurred while processing message in RabbitMQApiGatewayListener, _message_handler(): 'dict' object has no attribute 'card_number'
-CRITICAL:    2025-02-06 19:30:16 - src.main: Unhandled error occurred while processing message in RabbitMQApiGatewayListener, _message_handler(): 'dict' object has no attribute 'card_number'
-CRITICAL:    2025-02-06 19:32:30 - src.main: Unhandled error occurred while processing message in RabbitMQApiGatewayListener, _message_handler(): CardInfo.__init__() got an unexpected keyword argument 'payment_method_type'
-CRITICAL:    2025-02-06 19:34:01 - src.main: Unhandled error occurred while processing message in RabbitMQApiGatewayListener, _message_handler(): CardInfo.__init__() got an unexpected keyword argument 'payment_method_type'
-CRITICAL:    2025-02-06 19:50:52 - src.main: Unhandled error occurred while processing message in RabbitMQApiGatewayListener, _message_handler(): PaymentMethod.convert_datetime_fields_to_str() missing 1 required positional argument: 'data'
-CRITICAL:    2025-02-06 19:51:01 - src.main: Unhandled error occurred while processing message in RabbitMQApiGatewayListener, _message_handler(): PaymentMethod.convert_datetime_fields_to_str() missing 1 required positional argument: 'data'

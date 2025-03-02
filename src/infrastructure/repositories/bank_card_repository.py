@@ -1,5 +1,6 @@
 import uuid
 import datetime
+from decimal import Decimal
 from typing import Optional
 from uuid import UUID
 
@@ -17,39 +18,35 @@ class BankCardRepository(IBankCardRepository):
     @staticmethod
     def _to_domain(model: BankCardModel) -> CardPaymentMethod:
         """Convert database model to domain model."""
-        try:
-            month_str, year_str = model.expiration_date.split('/')
-            expiration_month = int(month_str)
-            expiration_year = int("20" + year_str) if len(year_str) == 2 else int(year_str)
-        except Exception as e:
-            raise ValueError(f"Invalid expiration_date format in DB model: {model.expiration_date}") from e
-
         return CardPaymentMethod(
             id=model.id,
             card_holder_first_name=model.card_holder_first_name,
             card_holder_last_name=model.card_holder_last_name,
             card_last_four=model.card_last_four,
-            expiration_month=expiration_month,
-            expiration_year=expiration_year,
+            expiration_date=model.expiration_date,
             payment_token=model.payment_token,
+            balance=model.balance,
             created_at=model.created_at,
-            updated_at=model.updated_at
+            updated_at=model.updated_at,
+            user_id=model.user_id
         )
 
     @staticmethod
     def _to_model(domain: CardPaymentMethod) -> BankCardModel:
         """Convert domain model to database model."""
         model_id = domain.id if domain.id is not None else uuid.uuid4()
-        expiration_date = f"{domain.expiration_month:02d}/{str(domain.expiration_year)[-2:]}"
 
         return BankCardModel(
             id=model_id,
             card_holder_first_name=domain.card_holder_first_name,
             card_holder_last_name=domain.card_holder_last_name,
             card_last_four=domain.card_last_four,
-            expiration_date=expiration_date,
+            expiration_date=domain.expiration_date,
+            balance=domain.balance,
             payment_token=domain.payment_token,
             is_active=True,
+
+            user_id=domain.user_id,
 
             created_at=domain.created_at if domain.created_at is not None else datetime.datetime.now(datetime.timezone.utc),
             updated_at=domain.updated_at if domain.updated_at is not None else datetime.datetime.now(datetime.timezone.utc)

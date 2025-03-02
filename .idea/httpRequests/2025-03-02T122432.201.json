@@ -1,0 +1,17 @@
+{
+  "status_code": 201,
+  "success": true,
+  "message": "Payment method added successfully.",
+  "content": {
+    "id": "9cb35731-7f0a-4bf6-8c09-bf53e1238525",
+    "card_holder_first_name": "Igor",
+    "card_holder_last_name": "Ruzhilov",
+    "card_last_four": "8901",
+    "expiration_date": "08/56",
+    "payment_token": "TEST-PAYMENT-TOKEN FOR: 12345678901, UNIQUE_ID: 34ba9078-145f-4b82-85f6-d499663f9ace",
+    "balance": "10000.00",
+    "created_at": "2025-03-02T07:24:32.100431Z",
+    "updated_at": "2025-03-02T07:24:32.100431Z",
+    "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+  }
+}

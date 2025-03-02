@@ -5,23 +5,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="21d5d8dc-26bf-40be-8157-c7f9a81b96b5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/domain/interfaces/repositories_interfaces/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/infrastructure/exceptions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/application/exceptions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/dependencies.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/exceptions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/exceptions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/interfaces/company_service_adapter_interface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/interfaces/user_service_adapter_interface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/models/company_responses.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/domain/models/user_responses.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/infrastructure/adapters/company_service_adapter.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/infrastructure/adapters/user_service_adapter.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/api/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/api/v1/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/api/v1/payment_routes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/schemas.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/dca6df62-4b00-4a31-8cc5-d50867c71bd0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/dca6df62-4b00-4a31-8cc5-d50867c71bd0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/dca6df62-4b00-4a31-8cc5-d50867c71bd0/storage_v2/_src_/database/autozen_payment_service_db.rAVlxw/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/dca6df62-4b00-4a31-8cc5-d50867c71bd0/storage_v2/_src_/database/autozen_payment_service_db.rAVlxw/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/application/interfaces/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/interfaces/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/application/interfaces/bank_account_repository_interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/interfaces/repositories_interfaces/bank_account_repository_interface.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/application/interfaces/bank_card_repository_interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/interfaces/repositories_interfaces/bank_card_repository_interface.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/application/interfaces/message_queue_interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/interfaces/message_queue_interface.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/application/interfaces/payment_gateway_interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/interfaces/payment_gateway_interface.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/api_gateway_log.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/4339be4308e9_setting_up_models_for_payment_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/application/use_cases/add_bank_account.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/use_cases/add_bank_account.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/application/use_cases/add_bank_card.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/use_cases/add_bank_card.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/exceptions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/interfaces/payment_gateway_interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/interfaces/payment_gateway_interface.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/domain/models/payment_methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/models/payment_methods.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/domain/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/schemas.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/infrastructure/adapters/bank_payment_gateway.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/infrastructure/adapters/bank_payment_gateway.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/infrastructure/adapters/rabbitmq_api_gateway_listener.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/infrastructure/adapters/rabbitmq_api_gateway_listener.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/infrastructure/adapters/rabbitmq_api_gateway_listener.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/infrastructure/dao/bank_account_dao.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/infrastructure/dao/bank_account_dao.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/infrastructure/database/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/infrastructure/database/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/infrastructure/exceptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/infrastructure/exceptions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/infrastructure/repositories/bank_account_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/infrastructure/repositories/bank_account_repository.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/infrastructure/repositories/bank_card_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/infrastructure/repositories/bank_card_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +83,8 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "FastAPI.Payment Service.executor": "Run",
+    "HTTP Request.generated-requests | #4.executor": "Run",
+    "HTTP Request.generated-requests | #6.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -71,7 +92,7 @@
     "database.data.extractors.current.id": "Comma-separated (CSV)_id",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/User/PycharmProjects/autozen-payment-service-repo/src/infrastructure/exceptions.py",
+    "last_opened_file_path": "C:/Users/User/PycharmProjects/autozen-payment-service-repo",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -94,11 +115,25 @@
       <recent name="C:\Users\User\PycharmProjects\autozen-payment-service-repo\src\infrastructure\adapters\interfaces" />
     </key>
   </component>
+  <component name="RunManager" selected="FastAPI.Payment Service">
+    <configuration name="generated-requests | #4" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#4" index="4" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #6" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#6" index="6" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.generated-requests | #4" />
+        <item itemvalue="HTTP Request.generated-requests | #6" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-PY-243.23654.177" />
-        <option value="bundled-python-sdk-91d3a02ef49d-43b77aa2d136-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.23654.177" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-PY-243.25659.43" />
+        <option value="bundled-python-sdk-181015f7ab06-4df51de95216-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.25659.43" />
       </set>
     </attachedChunks>
   </component>
@@ -119,6 +154,21 @@
       <workItem from="1738996073566" duration="8837000" />
       <workItem from="1739116005954" duration="5873000" />
       <workItem from="1739157665923" duration="4889000" />
+      <workItem from="1739172467460" duration="157000" />
+      <workItem from="1739245888982" duration="6489000" />
+      <workItem from="1739360581022" duration="2873000" />
+      <workItem from="1739377986871" duration="101000" />
+      <workItem from="1739510601402" duration="3597000" />
+      <workItem from="1739533123673" duration="1588000" />
+      <workItem from="1739598386662" duration="1176000" />
+      <workItem from="1739765920335" duration="1293000" />
+      <workItem from="1740310604904" duration="94000" />
+      <workItem from="1740368616346" duration="2449000" />
+      <workItem from="1740385766098" duration="7245000" />
+      <workItem from="1740809314183" duration="3706000" />
+      <workItem from="1740818646645" duration="3324000" />
+      <workItem from="1740835971228" duration="2690000" />
+      <workItem from="1740892690176" duration="13693000" />
     </task>
     <servers />
   </component>
@@ -126,6 +176,6 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/autozen_payment_service_repo$Payment_Service.coverage" NAME="Payment Service Coverage Results" MODIFIED="1739170751053" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/autozen_payment_service_repo$Payment_Service.coverage" NAME="Payment Service Coverage Results" MODIFIED="1740906859404" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

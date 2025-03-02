@@ -1,9 +1,4 @@
-class PaymentServiceException(Exception):
-    """Base exception for Payment Service errors."""
-    def __init__(self, status_code: int, detail: str) -> None:
-        self.status_code = status_code
-        self.detail = detail
-        super().__init__(self.detail)
+from src.core.exceptions import PaymentServiceException
 
 
 class InvalidPaymentMethodException(PaymentServiceException):
@@ -21,4 +16,18 @@ class RabbitMQError(PaymentServiceException):
 class PaymentGatewayException(PaymentServiceException):
     """Exception for payment gateway errors."""
     def __init__(self, detail: str = "Payment gateway error."):
-        super().__init__(detail=detail, status_code=400)
+        super().__init__(detail=detail, status_code=500)
+
+
+class UserServiceError(Exception):
+    """Exception for User Service's responses errors."""
+    def __init__(self, detail: str = "An error occurred in the User Service.", status_code: int = 500):
+        self.status_code = status_code
+        super().__init__(detail)
+
+
+class CompanyServiceError(Exception):
+    """Exception for Company Service's responses errors."""
+    def __init__(self, detail: str = "An error occurred in the Company Service.", status_code: int = 500):
+        self.status_code = status_code
+        super().__init__(detail)

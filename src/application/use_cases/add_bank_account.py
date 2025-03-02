@@ -1,43 +1,57 @@
-import datetime
-import uuid
+from typing import Optional
 
-from src.infrastructure.exceptions import InvalidPaymentMethodException
+from src.application.exceptions import InactiveCompanyError, CompanyNotFoundError, InvalidPaymentMethodError
+from src.core.logger import LoggerService
+from src.domain.interfaces.company_service_adapter_interface import ICompanyServiceAdapter
 from src.domain.interfaces.payment_gateway_interface import IPaymentGateway
 from src.domain.interfaces.repositories_interfaces.bank_account_repository_interface import IBankAccountRepository
+from src.domain.models.company_responses import CompanyResponseDTO
 from src.domain.models.payment_methods import BankAccountPaymentMethod
-from src.domain.schemas import BankAccountInfo
+from src.domain.schemas import AddBankAccountDTO
 
 
 class AddBankAccountUseCase:
     """
-    USE CASE: Create a new payment method (bank account) and get a token from the payment gateway (bank API).
+    USE CASE: Create a new payment method (bank account).
     """
-    def __init__(self, payment_gateway: IPaymentGateway,
-                 bank_account_repository: IBankAccountRepository) -> None:
+    def __init__(
+            self,
+            payment_gateway: IPaymentGateway,
+            bank_account_repository: IBankAccountRepository,
+            company_adapter: ICompanyServiceAdapter,
+            logger: LoggerService,
+    ) -> None:
         self._payment_gateway = payment_gateway
         self._bank_account_repository = bank_account_repository
+        self._company_adapter = company_adapter
+        self._logger = logger
 
-    async def execute(self, bank_account_info: BankAccountInfo) -> BankAccountPaymentMethod:
-        bank_account_info = self._add_bank_account(bank_account_info)
+    async def execute(self, bank_account: AddBankAccountDTO) -> BankAccountPaymentMethod:
+        try:
+            # Check if this company is existing in the system
+            company = await self._company_adapter.get_company_by_id(bank_account.company_id)
 
-        return await self._bank_account_repository.create(bank_account_info)
+            # Check if this company is inactive
+            if not company.is_active:
+                raise InactiveCompanyError(
+                    status_code=403,
+                    message="Company is not active."
+                )
 
-    @staticmethod
-    def _add_bank_account(bank_account_info: BankAccountInfo) -> BankAccountPaymentMethod:
-        current_time = datetime.datetime.now(datetime.UTC)
+            bank_account = BankAccountPaymentMethod(**bank_account.to_dict())
 
-        return BankAccountPaymentMethod(
-            id=uuid.uuid4(),
-            account_holder_name=bank_account_info.account_holder_name,
-            account_number=bank_account_info.account_number,
-            bank_name=bank_account_info.bank_name,
-            bank_bic=bank_account_info.bank_bic,
-            created_at=current_time,
-            updated_at=current_time
-        )
+            return await self._bank_account_repository.create(bank_account)
+        except (
+                InvalidPaymentMethodError,
+                CompanyNotFoundError,
+                InactiveCompanyError
+        ) as e:
+            self._logger.error(f"Error creating bank account: {e}.")
+            raise
+        except Exception as e:
+            self._logger.critical(f"Unexpected error creating bank account: {str(e)}.")
+            raise
 
-    @staticmethod
-    def _validate_bank_account(bank_account: BankAccountPaymentMethod) -> None:
-        """Validate the bank account before creation."""
-        if not bank_account.can_be_used_for_payment():
-            raise InvalidPaymentMethodException("This bank account cannot be used for payment.")
+
+
+

@@ -2,6 +2,7 @@ import re
 from dataclasses import dataclass
 from datetime import date
 from typing import Tuple, Optional, Union
+from uuid import UUID
 
 
 @dataclass
@@ -34,13 +35,16 @@ class RabbitMQResponse:
 
 # Primarily for users
 @dataclass(frozen=True)
-class CardInfo:
-    """Value object for card information before tokenization."""
+class AddBankCardDTO:
+    """
+    Domain DTO schema for adding a bank card to the user's account.
+    """
+    user_id: UUID
     card_holder_first_name: str
     card_holder_last_name: str
-    card_number: str
+    card_number: str  # 11-16 digits
     expiration_date: str  # Format: MM/YY
-    cvv_code: str
+    cvv_code: str  # 3 digits
 
     def __post_init__(self):
         self._validate()
@@ -81,19 +85,39 @@ class CardInfo:
         """Get last four digits of card number."""
         return self.card_number[-4:]
 
+    def to_dict(self) -> dict:
+        """Convert the domain DTO object to a dictionary."""
+        return dict(
+            card_holder_first_name=self.card_holder_first_name,
+            card_holder_last_name=self.card_holder_last_name,
+            card_number=self.card_number,
+            expiration_date=self.expiration_date,
+            cvv_code=self.cvv_code
+        )
+
 
 # Primarily for businesses
 @dataclass(frozen=True)
-class BankAccountInfo:
+class AddBankAccountDTO:
+    """
+    Domain DTO schema for adding a bank account to the company's account.
+    """
     account_holder_name: str
     account_number: str
-    bank_name: str
-    bank_bic: str
+    company_id: UUID
 
-    def __post_init__(self):
-        self._validate()
+    def __post_init__(self) -> None:
+        if not self.account_holder_name.strip():
+            raise ValueError("account_holder_name cannot be empty or consist only of spaces.")
+        if not self.account_number.strip():
+            raise ValueError("account_number cannot be empty or consist only of spaces.")
 
-    def _validate(self) -> None:
-        # Validating account number format goes here
-        if not re.match(r"^\d{10,20}$", self.account_number):
-            raise ValueError("Invalid account number format.")
+    def to_dict(self) -> dict:
+        """
+        Convert the domain DTO object to a dictionary.
+        """
+        return dict(
+            account_holder_name=self.account_holder_name,
+            account_number=self.account_number,
+            company_id= str(self.company_id)
+        )
