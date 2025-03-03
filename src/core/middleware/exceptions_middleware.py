@@ -4,6 +4,7 @@ from starlette.responses import JSONResponse
 from starlette import status
 
 from src.application.exceptions import InactiveCompanyError, ExistingBankAccountError, UserNotActiveError
+from src.core.exceptions import PaymentServiceError
 from src.infrastructure.exceptions import CompanyServiceError, UserServiceError
 
 
@@ -11,6 +12,11 @@ class ExceptionMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
         try:
             return await call_next(request)
+        except PaymentServiceError as exc:
+            return JSONResponse(
+                status_code=exc.status_code,
+                content={"success": False, "message": exc.detail},
+            )
         except CompanyServiceError as exc:
             return JSONResponse(
                 status_code=status.HTTP_404_NOT_FOUND,

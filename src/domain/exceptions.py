@@ -1,2 +1,2 @@
-from src.core.exceptions import PaymentServiceException
+from src.core.exceptions import PaymentServiceError
 

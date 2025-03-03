@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from starlette.middleware.base import BaseHTTPMiddleware
 
 from src.core.dependencies import setup_dependencies
+from src.core.middleware.clients_filter_middleware import IPFilterMiddleware
 from src.core.middleware.exceptions_middleware import ExceptionMiddleware
 from src.presentation.api.v1.payment_routes import payment_router
 
@@ -18,6 +19,8 @@ def create_app() -> FastAPI:
 app = create_app()
 
 app.include_router(payment_router)
+
+app.add_middleware(IPFilterMiddleware)
 app.add_middleware(BaseHTTPMiddleware, dispatch=ExceptionMiddleware(app=app).dispatch)
 
 if __name__ == "__main__":

@@ -1,24 +1,17 @@
 from typing import Annotated
 from fastapi import APIRouter, Body, Depends
 
-from src.application.exceptions import UserNotActiveError, InactiveCompanyError, ExistingBankAccountError
 from src.application.use_cases.add_bank_account import AddBankAccountUseCase
 from src.application.use_cases.add_bank_card import AddBankCardUseCase
-from src.core.dependencies import get_add_bank_card_use_case, get_add_bank_account_use_case, get_logger
-from src.core.logger import LoggerService
+from src.core.dependencies import get_add_bank_card_use_case, get_add_bank_account_use_case
 from src.domain.models.payment_methods import CardPaymentMethod, BankAccountPaymentMethod
 from src.domain.schemas import AddBankCardDTO, AddBankAccountDTO
-from src.infrastructure.exceptions import UserServiceError, CompanyServiceError
-from src.presentation.schemas import AddBankCardRequest, AddBankAccountResponse, \
-    AddBankAccountRequest, APIResponse
+from src.presentation.schemas import AddBankCardRequest, AddBankAccountRequest, APIResponse
 
 payment_router = APIRouter(
     tags=["Payment"],
     prefix="/api/v1/payment",
 )
-
-
-from fastapi import HTTPException, status
 
 @payment_router.post('/bank_card', response_model=APIResponse[CardPaymentMethod], status_code=201)
 async def add_bank_card(

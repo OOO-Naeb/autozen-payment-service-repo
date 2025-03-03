@@ -1,19 +1,19 @@
-from src.core.exceptions import PaymentServiceException
+from src.core.exceptions import PaymentServiceError
 
 
-class InvalidPaymentMethodException(PaymentServiceException):
+class InvalidPaymentMethodError(PaymentServiceError):
     """Exception for invalid payment method information."""
     def __init__(self, detail: str = "Invalid payment method information."):
         super().__init__(detail=detail, status_code=400)
 
 
-class RabbitMQError(PaymentServiceException):
+class RabbitMQError(PaymentServiceError):
     """Exception for RabbitMQ service being unavailable."""
     def __init__(self, detail: str = "RabbitMQ is unavailable."):
         super().__init__(detail=detail, status_code=503)
 
 
-class PaymentGatewayException(PaymentServiceException):
+class PaymentGatewayError(PaymentServiceError):
     """Exception for payment gateway errors."""
     def __init__(self, detail: str = "Payment gateway error."):
         super().__init__(detail=detail, status_code=500)
