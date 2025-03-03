@@ -106,7 +106,7 @@ class AddBankAccountRequest(BaseModel):
     ]
     account_number: Annotated[
         str,
-        Field(min_length=20, max_length=20, description="Account number in IBAN format. Must start with 'KZ' followed by 18 digits.")
+        Field(description="Account number in IBAN format. Must start with 'KZ' followed by 18 digits.")
     ]
     company_id: Annotated[UUID, Field(description="Unique identifier of the company.")]
 

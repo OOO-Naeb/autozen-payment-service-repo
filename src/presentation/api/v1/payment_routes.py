@@ -24,43 +24,28 @@ from fastapi import HTTPException, status
 async def add_bank_card(
         card_info: Annotated[AddBankCardRequest, Body(...)],
         use_case: Annotated[AddBankCardUseCase, Depends(get_add_bank_card_use_case)],
-        logger: Annotated[LoggerService, Depends(get_logger)]
 ) -> APIResponse[CardPaymentMethod]:
-    try:
-        bank_card_domain_dto = AddBankCardDTO(**card_info.model_dump())
-        card_domain_model = await use_case.execute(bank_card_domain_dto)
+    """
+    CONTROLLER: Add a payment method to the user's account.
+    Passes the query to the 'AddBankCardUseCase'.
 
-        return APIResponse(
-            success=True,
-            message='Payment method added successfully.',
-            content={
-                **card_domain_model.to_dict()
-            }
-        )
-    except ValueError as exc:
-        logger.critical(f"Error while adding the bank card: {exc}")
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Error while adding the bank card: {exc}"
-        )
-    except UserServiceError as exc:
-        logger.warning(f"User not found: {exc}")
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"User not found: {exc}"
-        )
-    except UserNotActiveError as exc:
-        logger.warning(f"User is not active: {exc}")
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail=f"{exc}"
-        )
-    except Exception as exc:
-        logger.critical(f"Unhandled error: {exc}")
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Unhandled error: {exc}"
-        )
+    Args:
+        card_info (AddBankCardRequest): The card information to add to the user's account.
+        use_case (AddBankCardUseCase): The payment use_case to process the operation.
+
+    Returns:
+        APIResponse: A response schema containing status code, message and bank response.
+    """
+    bank_card_domain_dto = AddBankCardDTO(**card_info.model_dump())
+    card_domain_model = await use_case.execute(bank_card_domain_dto)
+
+    return APIResponse(
+        success=True,
+        message='Payment method added successfully.',
+        content={
+            **card_domain_model.to_dict()
+        }
+    )
 
 
 
@@ -68,7 +53,6 @@ async def add_bank_card(
 async def add_bank_account(
         bank_account_info: Annotated[AddBankAccountRequest, Body(...)],
         use_case: Annotated[AddBankAccountUseCase, Depends(get_add_bank_account_use_case)],
-        logger: Annotated[LoggerService, Depends(get_logger)]
 ) -> APIResponse[BankAccountPaymentMethod]:
     """
     CONTROLLER: Add a payment method to the company's account.
@@ -77,50 +61,17 @@ async def add_bank_account(
     Args:
         bank_account_info (AddBankAccountRequest): The bank account information to add.
         use_case (AddBankAccountUseCase): The use case to process the operation.
-        logger (LoggerService): The logger service.
 
     Returns:
-        AddBankAccountResponse: A response schema for the added bank account.
+        APIResponse: A response schema containing status code, message and bank response.
     """
-    try:
-        bank_account_domain_dto = AddBankAccountDTO(**bank_account_info.model_dump())
-        bank_account_domain_model = await use_case.execute(bank_account_domain_dto)
+    bank_account_domain_dto = AddBankAccountDTO(**bank_account_info.model_dump())
+    bank_account_domain_model = await use_case.execute(bank_account_domain_dto)
 
-        return APIResponse(
-            success=True,
-            message='Payment method added successfully.',
-            content={
-                **bank_account_domain_model.to_dict()
-            }
-        )
-    except ValueError as exc:
-        logger.critical(f"Error while adding the bank card: {exc}")
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Error while adding the bank card: {exc}"
-        )
-    except CompanyServiceError as exc:
-        logger.warning(f"Company not found: {exc}")
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Company not found: {exc}"
-        )
-    except InactiveCompanyError as exc:
-        logger.warning(f"Company is not active: {exc}")
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail=f"{exc}"
-        )
-    except ExistingBankAccountError as exc:
-        logger.warning(f"Bank account already exists: {exc}")
-
-        raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT,
-            detail=f"{exc}"
-        )
-    except Exception as e:
-        logger.error(f"Error occurred while adding the bank account: {e}")
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error occurred while adding the bank account: {str(e)}"
-        )
+    return APIResponse(
+        success=True,
+        message='Payment method added successfully.',
+        content={
+            **bank_account_domain_model.to_dict()
+        }
+    )

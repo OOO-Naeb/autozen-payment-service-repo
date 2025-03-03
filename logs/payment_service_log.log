@@ -48,3 +48,11 @@ ERROR:    2025-03-02 20:55:08 - src.core.dependencies: Error creating bank accou
 CRITICAL:    2025-03-02 20:55:46 - src.core.dependencies: Unexpected error creating bank account: Company with ID: 3fa85f64-5717-4562-b3fc-2c963f66afa6 not found..
 ERROR:    2025-03-02 20:55:48 - src.core.dependencies: Error creating bank account: This company already has a bank account..
 ERROR:    2025-03-02 21:18:52 - src.core.dependencies: Error creating bank account: This company already has a bank account..
+ERROR:    2025-03-03 10:43:38 - src.core.dependencies: Error creating bank account: This company already has a bank account..
+ERROR:    2025-03-03 10:46:22 - src.core.dependencies: Error creating bank account: This company already has a bank account..
+ERROR:    2025-03-03 10:46:28 - src.core.dependencies: Error creating bank account: This company already has a bank account..
+ERROR:    2025-03-03 10:46:30 - src.core.dependencies: Error creating bank account: This company already has a bank account..
+CRITICAL:    2025-03-03 10:46:31 - src.core.dependencies: Unexpected error creating bank account: Company with ID: 3fa85f64-5717-4562-b3fc-2c963f66afa1 not found..
+CRITICAL:    2025-03-03 10:55:34 - src.core.dependencies: Unexpected error creating bank account: Company with ID: 3fa85f64-5717-4562-b3fc-2c963f66afa1 not found..
+CRITICAL:    2025-03-03 10:55:36 - src.core.dependencies: Unexpected error creating bank account: Company with ID: 3fa85f64-5717-4562-b3fc-2c963f66afa1 not found..
+ERROR:    2025-03-03 10:55:38 - src.core.dependencies: Error creating bank account: This company already has a bank account..

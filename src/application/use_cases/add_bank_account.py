@@ -1,14 +1,12 @@
-from typing import Optional
-
 from src.application.exceptions import InactiveCompanyError, CompanyNotFoundError, InvalidPaymentMethodError, \
     ExistingBankAccountError
 from src.core.logger import LoggerService
 from src.domain.interfaces.company_service_adapter_interface import ICompanyServiceAdapter
 from src.domain.interfaces.payment_gateway_interface import IPaymentGateway
 from src.domain.interfaces.repositories_interfaces.bank_account_repository_interface import IBankAccountRepository
-from src.domain.models.company_responses import CompanyResponseDTO
 from src.domain.models.payment_methods import BankAccountPaymentMethod
 from src.domain.schemas import AddBankAccountDTO
+from src.infrastructure.exceptions import CompanyServiceError
 
 
 class AddBankAccountUseCase:
@@ -35,10 +33,12 @@ class AddBankAccountUseCase:
             # Check if this company already has a bank account in the 'bank_accounts' table
             bank_account_exists = await self._bank_account_repository.get_by_company_id(bank_account.company_id)
             if bank_account_exists:
+                self._logger.warning(f"This company - {company.id} already has a bank account.")
                 raise ExistingBankAccountError()
 
             # Check if this company is inactive
             if not company.is_active:
+                self._logger.warning(f"Company - {company.id} is not active.")
                 raise InactiveCompanyError(
                     status_code=403,
                     message="Company is not active."
@@ -48,17 +48,11 @@ class AddBankAccountUseCase:
 
             return await self._bank_account_repository.create(bank_account)
         except (
-                InvalidPaymentMethodError,
-                CompanyNotFoundError,
+                CompanyServiceError,
                 InactiveCompanyError,
                 ExistingBankAccountError
-        ) as e:
-            self._logger.error(f"Error creating bank account: {e}.")
+        ):
             raise
         except Exception as e:
             self._logger.critical(f"Unexpected error creating bank account: {str(e)}.")
             raise
-
-
-
-

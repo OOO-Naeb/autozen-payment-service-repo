@@ -5,12 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="21d5d8dc-26bf-40be-8157-c7f9a81b96b5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/core/middleware/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/middleware/exceptions_middleware.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/payment_service_log.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/payment_service_log.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/application/exceptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/exceptions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/application/use_cases/add_bank_account.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/use_cases/add_bank_account.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/interfaces/repositories_interfaces/bank_account_repository_interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/interfaces/repositories_interfaces/bank_account_repository_interface.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/infrastructure/adapters/user_service_adapter.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/infrastructure/adapters/user_service_adapter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/infrastructure/adapters/company_service_adapter.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/infrastructure/adapters/company_service_adapter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/presentation/api/v1/payment_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/presentation/api/v1/payment_routes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/presentation/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/presentation/schemas.py" afterDir="false" />
     </list>
@@ -141,7 +142,8 @@
       <workItem from="1740818646645" duration="3324000" />
       <workItem from="1740835971228" duration="2690000" />
       <workItem from="1740892690176" duration="14012000" />
-      <workItem from="1740923844613" duration="4370000" />
+      <workItem from="1740923844613" duration="5283000" />
+      <workItem from="1740977869234" duration="4681000" />
     </task>
     <servers />
   </component>
@@ -149,6 +151,6 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/autozen_payment_service_repo$Payment_Service.coverage" NAME="Payment Service Coverage Results" MODIFIED="1740929187240" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/autozen_payment_service_repo$Payment_Service.coverage" NAME="Payment Service Coverage Results" MODIFIED="1740983824213" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>
