@@ -1,11 +1,10 @@
+import re
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from datetime import datetime, date
 from decimal import Decimal
 from typing import Optional, Dict, Any
 import uuid
-
-from sqlalchemy import Numeric
 
 
 @dataclass
@@ -104,6 +103,16 @@ class BankAccountPaymentMethod(PaymentMethod):
     is_active: bool = True
 
     company_id: uuid.UUID
+
+    def __post_init__(self):
+        if not self.account_holder_name.strip():
+            raise ValueError("Account holder name cannot be empty or consist only of spaces.")
+
+        if not re.fullmatch(r"^KZ\d{18}$", self.account_number):
+            raise ValueError("Account number must be a valid Kazakhstan IBAN (e.g., 'KZ' followed by 18 digits).")
+
+        if self.bank_bic and not re.fullmatch(r"^[A-Z0-9]{8,11}$", self.bank_bic):
+            raise ValueError("Bank BIC must be 8 or 11 alphanumeric characters.")
 
     def can_be_used_for_payment(self) -> bool:
         return self.is_active

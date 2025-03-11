@@ -4,6 +4,8 @@ from starlette.requests import Request
 from src.core.exceptions import PaymentServiceError
 
 ALLOWED_IPS = ('localhost', '127.0.0.1')
+
+
 # ALLOWED_PORTS = (8000, 8001, 56182)
 
 class IPFilterMiddleware(BaseHTTPMiddleware):
